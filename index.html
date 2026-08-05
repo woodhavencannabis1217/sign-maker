@@ -265,6 +265,13 @@ function buildCarouselEditor(container) {
   note.textContent = 'Click a photo slot to upload. Add as many products as you want.';
   container.appendChild(note);
 
+  // Add-product button lives at the TOP, above the scrolling list, so it's
+  // always visible without any scrolling (it was too easy to miss below).
+  const addBtn = document.createElement('button');
+  addBtn.className = 'add-prod-btn';
+  addBtn.textContent = '➕  Add Another Product';
+  container.appendChild(addBtn);
+
   const scrollWrap = document.createElement('div');
   scrollWrap.className = 'prod-scroll-wrap';
   container.appendChild(scrollWrap);
@@ -374,11 +381,6 @@ function buildCarouselEditor(container) {
     });
   }
 
-  // Add product button lives OUTSIDE the scroll area so it's always
-  // visible — buried at the bottom of the scroll it was easy to miss.
-  const addBtn = document.createElement('button');
-  addBtn.className = 'add-prod-btn';
-  addBtn.textContent = '➕  Add Another Product';
   addBtn.addEventListener('click', () => {
     const colors = ['#22c55e','#d4a227','#e63946','#48cae4','#ff006e','#a855f7','#f97316'];
     carouselProducts.push({
@@ -392,7 +394,6 @@ function buildCarouselEditor(container) {
     // Scroll to bottom so user sees the new product
     setTimeout(() => { scrollWrap.scrollTop = scrollWrap.scrollHeight; }, 50);
   });
-  container.appendChild(addBtn);
 
   renderProdList();
 }
