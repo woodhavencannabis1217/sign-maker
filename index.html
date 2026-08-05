@@ -289,8 +289,6 @@ function buildCarouselEditor(container) {
 
   function renderProdList() {
     prodListEl.innerHTML = '';
-    // ensure add button stays at bottom of scrollWrap
-    scrollWrap.appendChild(addBtn);
     carouselProducts.forEach((p, i) => {
       const item = document.createElement('div');
       item.className = 'prod-item';
@@ -376,7 +374,8 @@ function buildCarouselEditor(container) {
     });
   }
 
-  // Add product button lives INSIDE the scroll area, after the list
+  // Add product button lives OUTSIDE the scroll area so it's always
+  // visible — buried at the bottom of the scroll it was easy to miss.
   const addBtn = document.createElement('button');
   addBtn.className = 'add-prod-btn';
   addBtn.textContent = '➕  Add Another Product';
@@ -393,7 +392,7 @@ function buildCarouselEditor(container) {
     // Scroll to bottom so user sees the new product
     setTimeout(() => { scrollWrap.scrollTop = scrollWrap.scrollHeight; }, 50);
   });
-  scrollWrap.appendChild(addBtn);
+  container.appendChild(addBtn);
 
   renderProdList();
 }
